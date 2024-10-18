@@ -16,20 +16,19 @@ void	*ft_memchr(const void *str, int c, size_t nbytes)
 {
 	char		ret;
 	size_t		count;
-	const char	*strtemp;
+	const char* strt;
 
 	ret = (char)c;
 	count = 0;
-	strtemp = str;
-	while (*strtemp && count < nbytes)
+	strt = str;
+	if (ret == '\0')
+	return ((char *)&strt[count]);
+	while (strt[count] != '\0' && count < nbytes)
 	{
-		if (*strtemp == ret)
-			return ((char *)strtemp);
-		strtemp++;
+		if (strt[count] == ret)
+			return ((char *)&strt[count]);
 		count++;
 	}
-	if (ret == '\0')
-		return ((char *)strtemp);
 	return (0);
 }
 
@@ -58,13 +57,13 @@ void	*ft_memchr(const void *str, int c, size_t nbytes)
 		return (0);
 } */
 
-/* int	main(void)
+int	main(void)
 {
-	char str[] = "wobuaini";
-	int c = 'a';
-	unsigned int nbytes = 6;
+	const char *str = "bbbacaa";
+	int c = 'c';
+	unsigned int nbytes = 4;
+	const char *res = ft_memchr(str, c, nbytes);
 
-	ft_memchr(str, c, nbytes);
-	printf("%s", str);
+	printf("%s", res);
 	return (0);
-} */
+}

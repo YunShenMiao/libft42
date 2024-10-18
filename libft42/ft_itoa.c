@@ -13,32 +13,67 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int	ft_strlen(char const *stri)
+{
+	int	count;
+
+	count = 0;
+	while (stri[count] != '\0')
+	{
+		count++;
+	}
+	return (count);
+}
+
+char	*ft_strdup(const char *src)
+{
+	int		strl;
+	char	*res;
+	int		count;
+
+	strl = ft_strlen(src);
+	res = malloc((strl + 1) * sizeof(char));
+	count = 0;
+	if (res == NULL)
+		return (NULL);
+	while (src[count] != '\0')
+	{
+		res[count] = src[count];
+		count++;
+	}
+	res[count] = '\0';
+	return (res);
+}
+
 char *ft_itoa(int n)
 {
     int len;
     int ncopy;
-    int count;
 	int sign;
     char *res;
 
     len = 0;
 	sign = 0;
-	ncopy = n;
     if (n < 0)
 	{
-    ncopy = -n;
+        if (n == -2147483648)
+        return ft_strdup("-2147483648");
 	n = -n;
 	sign = 1;
 	}
+    ncopy = n;
 	while (n > 0)
 	{
         n = n / 10;
         len++;
 	}
 	res = malloc((len + 1 + sign) * sizeof(char));
-	res[len + sign] = '\0';
+    if (res == NULL)
+    return NULL;
+    len = len + sign;
+    res[len] = '\0';
 	len --;
-	while (len > (0 + sign))
+	while (len > 0)
 	{
 		res[len] = ncopy % 10 + '0';
 		ncopy = ncopy / 10;
@@ -46,14 +81,13 @@ char *ft_itoa(int n)
 	}
 	if (sign == 1)
 	res[0] = '-';
-    printf("%s", res);
     return(res);
 }
 
 #include <stdio.h>
 int main()
 {
-    int n = -3571;
+    int n = -2147483648;
     char *res = ft_itoa(n);
     printf("%s", res);
     free(res);

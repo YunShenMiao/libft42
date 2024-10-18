@@ -72,21 +72,23 @@ char    *ft_strtrim(char const *s1, char const *set)
     int     count;
     char    *res;
     int     begin2;
+	int strls1;
 
-    if (*s1 == '\0')
+	strls1 = ft_strlen(s1);
+    begin = ft_beg(s1, set);
+	    if (*s1 == '\0' || begin == strls1)
     {
         res = malloc(1);
         res[0] = '\0';
         return(res);
     }
-    begin = ft_beg(s1, set);
     end = ft_end(s1, set);
-    res = malloc((ft_strlen(s1) - end - begin + 1) * sizeof(char));
+    res = malloc((strls1 - end - begin + 1) * sizeof(char));
     if (res == NULL)
         return (NULL);
     count = 0;
     begin2 = begin;
-    while (count < (ft_strlen(s1) - end - begin2))
+    while (count < (strls1 - end - begin2))
     {
         res[count] = s1[begin];
         count++;
@@ -100,7 +102,7 @@ char    *ft_strtrim(char const *s1, char const *set)
 
 int main(void)
 {
-    char const *s1 = "";
+    char const *s1 = "jjjkkkhabcdehhkj";
     char const *set = "hjk";
     char *trimmed = ft_strtrim(s1, set);
 

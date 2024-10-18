@@ -15,6 +15,28 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char *res;
+	size_t count;
+	size_t rescount;
+
+	res = malloc((len + 1)*sizeof(char));
+	count = 0;
+	rescount = 0;
+	if (res == NULL)
+	return NULL;
+	while (count < start)
+	count++;
+	while (count < (start+len))
+	{
+		res[rescount] = s[count];
+		rescount++;
+		count++;
+	}
+	res[rescount] = '\0';
+	return(res);
+}
+
+/*{
 	char			*res;
 	unsigned int	count;
 	unsigned int	lencount;
@@ -37,16 +59,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	res[lencount] = '\0';
 	return (res);
-}
-/*
+}*/
+
 int	main(void)
 {
 	const char *s = "miaomuh";
-	unsigned int start = 3;
-	size_t len = 4;
+	unsigned int start = 0;
+	size_t len = 2;
 	char *res = ft_substr(s, start, len);
 
 	printf("%s", res);
 	free(res);
 	return(0);
-} */
+}
